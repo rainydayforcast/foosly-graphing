@@ -1,17 +1,19 @@
-from bottle import get
+from bottle import post, request
 import numpy as np
 import matplotlib.pyplot as plt
 import uuid
 
-@get('/test')
+@post('/scatter')
 def test():
-    N = 50
-    x = np.random.rand(N)
-    y = np.random.rand(N)
-    colors = np.random.rand(N)
-    area = np.pi * (15 * np.random.rand(N))**2  # 0 to 15 point radii
+    for entity in request.json:
+        x = entity['x']
+        y = entity['y']
+        name = entity['name']
+        size = entity['size'] if 'size' in entity else 80
+        plt.scatter(x, y, label=name, s=size)
 
-    plt.scatter(x, y, s=area, c=colors, alpha=0.5)
+    plt.legend()
     path = 'static/' + str(uuid.uuid4()) + '.png'
     plt.savefig(path, bbox_inches='tight')
+    plt.gcf().clear()
     return { 'path': path }
