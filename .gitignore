@@ -111,3 +111,4 @@ lib-cov
 coverage
 .env
 .DS_Store
+static
