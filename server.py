@@ -4,4 +4,4 @@ matplotlib.use('Agg')
 from routes import static, scatter
 from bottle import run
 
-run(port=os.environ['PORT'])
+run(host='0.0.0.0', port=int(os.environ.get("PORT")))
