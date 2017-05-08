@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import uuid
 
+plt.use('Agg')
+
 @get('/test')
 def test():
     N = 50
