@@ -4,13 +4,12 @@ import matplotlib.pyplot as plt
 import uuid
 
 @post('/scatter')
-def test():
+def scatter():
     for entity in request.json:
         x = entity['x']
         y = entity['y']
         name = entity['name']
-        size = entity['size'] if 'size' in entity else 80
-        plt.scatter(x, y, label=name, s=size)
+        plt.scatter(x, y, label=name, size=(np.pi * (6)**2))
 
     plt.legend()
     path = 'static/' + str(uuid.uuid4()) + '.png'
